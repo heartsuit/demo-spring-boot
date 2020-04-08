@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: logback-test
+logging:
+  file:
+    path: /opt/${spring.application.name}}
