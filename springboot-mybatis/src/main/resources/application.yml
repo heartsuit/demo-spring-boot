@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://localhost:3306/boost-admin?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: D/pBfX7uKgNrFNtVbvf5pevX5JAcBbzisC/4JK3hTN5Xty3sm8zWtSjd9TwggT/phP8Ob0wg1qZRVolxmd/39g==
+      # encrypt config
+      filters: config
+      connect-properties:
+        config.decrypt: true
+        config.decrypt.key: ${spring.datasource.druid.publickey}
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.heartsuit.springbootmybatis.oa.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
