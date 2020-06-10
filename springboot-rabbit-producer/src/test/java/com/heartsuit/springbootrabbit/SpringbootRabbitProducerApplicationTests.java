@@ -21,4 +21,8 @@ public class SpringbootRabbitProducerApplicationTests {
 		producer.sendExchange();
 	}
 
+	@Test
+	public void delayedMessage() {
+		producer.sendDelayedMessage("I am Delayed Message!");
+	}
 }
