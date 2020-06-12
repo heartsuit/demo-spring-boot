@@ -1,0 +1,7 @@
+server:
+  port: 8888
+#spring:
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss
+#    serialization:
+#      WRITE_DATES_AS_TIMESTAMPS: false
