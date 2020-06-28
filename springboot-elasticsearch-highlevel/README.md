@@ -13,25 +13,25 @@ Java High Level REST Client: the official high-level client for Elasticsearch. B
 
 ```xml
 <!--ES-->
-		<!--The High Level Java REST Client depends on the following artifacts and their transitive dependencies:
-			org.elasticsearch.client:elasticsearch-rest-client
-			org.elasticsearch:elasticsearch
-		-->
-		<dependency>
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>elasticsearch-rest-high-level-client</artifactId>
-			<version>7.5.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>elasticsearch-rest-client</artifactId>
-			<version>7.5.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.elasticsearch</groupId>
-			<artifactId>elasticsearch</artifactId>
-			<version>7.5.2</version>
-		</dependency>
+<!--The High Level Java REST Client depends on the following artifacts and their transitive dependencies:
+  org.elasticsearch.client:elasticsearch-rest-client
+  org.elasticsearch:elasticsearch
+-->
+<dependency>
+  <groupId>org.elasticsearch.client</groupId>
+  <artifactId>elasticsearch-rest-high-level-client</artifactId>
+  <version>7.5.2</version>
+</dependency>
+<dependency>
+  <groupId>org.elasticsearch.client</groupId>
+  <artifactId>elasticsearch-rest-client</artifactId>
+  <version>7.5.2</version>
+</dependency>
+<dependency>
+  <groupId>org.elasticsearch</groupId>
+  <artifactId>elasticsearch</artifactId>
+  <version>7.5.2</version>
+</dependency>
 ```
 ### 核心方法
 
