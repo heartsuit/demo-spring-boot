@@ -1,0 +1,2 @@
+SpringBoot集成spring-session、Redis实现Session共享
+默认SpringSecurity的密码在启动阶段生成，用户名为user
