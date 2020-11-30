@@ -15,11 +15,14 @@ public class LoginController {
 
   @GetMapping(value = "/user/add")
   public String accessResource1() {
+    System.out.println("Add");
     return " Access Resource 1: Add User";
   }
 
   @GetMapping(value = "/user/query")
   public String accessResource2() {
+    System.out.println("Query");
+
     return " Access Resource 2: Query User";
   }
 }
