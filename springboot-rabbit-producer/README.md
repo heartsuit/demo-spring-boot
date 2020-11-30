@@ -60,6 +60,8 @@ rabbitmqctl purge_queue queue_name
 
 地址：http://www.rabbitmq.com/community-plugins.html
 
+下载完插件后，将其置于RabbitMQ安装目录下的plugins目录下
+
 - 启动插件
 
 rabbitmq-plugins enable rabbitmq_delayed_message_exchange
