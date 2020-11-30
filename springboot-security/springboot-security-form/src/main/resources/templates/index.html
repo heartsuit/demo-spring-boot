@@ -1,14 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="csrf" th:content="${_csrf.token}">
+  <meta name="_csrf_header" th:content="${_csrf.headerName}" />
   <title>SpringSecurity</title>
 </head>
+
 <body>
   <a href="/user/add">添加用户</a>
   <a href="/user/query">查询用户</a>
+  <a href="/hi">csrf</a>
+
   <a href="/logout">退出</a>
+
+  <script language="JavaScript">
+    // let token = document.getElementsByTagName('meta')['csrf'].content;
+    let token = document.querySelector('meta[name="csrf"]').getAttribute('content');
+    let header = document.getElementsByTagName('meta')['_csrf_header'].content;
+    console.log("token: ", token);
+    console.log("header: ", header);
+
+    function click() {
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://hello:8080/hi", true);
+      xhr.setRequestHeader(header, token);
+      xhr.onload = function (e) {
+        console.log("response: ", e.target.responseText);
+      }
+      xhr.onerror = function (e) {
+        console.log("error: ", e)
+      }
+      xhr.send(null);
+    }
+
+    click();
+  </script>
 </body>
+
 </html>

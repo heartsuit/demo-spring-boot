@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").authenticated()
                 .anyRequest().permitAll() // Let other request pass
                 .and()
-                .csrf().disable() // turn off csrf, or will be 403 forbidden
+                // .csrf().disable() // turn off csrf, or will be 403 forbidden
                 .formLogin() // Support form and HTTPBasic
                 .loginPage("/login")
                 .successForwardUrl("/greeting")// custom login success page, a POST request
