@@ -17,6 +17,12 @@
 
   <a href="/logout">退出</a>
 
+  <form action="/leave" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <input type="submit" value="POST logout" />
+  </form>
+
+
   <script language="JavaScript">
     // let token = document.getElementsByTagName('meta')['csrf'].content;
     let token = document.querySelector('meta[name="csrf"]').getAttribute('content');
@@ -26,7 +32,7 @@
 
     function click() {
       let xhr = new XMLHttpRequest();
-      xhr.open("POST", "http://hello:8080/hi", true);
+      xhr.open("POST", "http://localhost:8080/ok", true);
       xhr.setRequestHeader(header, token);
       xhr.onload = function (e) {
         console.log("response: ", e.target.responseText);
@@ -38,6 +44,19 @@
     }
 
     click();
+
+    function getCookie(name) {
+      let arr = document.cookie.split("; ");
+      for (let i = 0; i < arr.length; i++) {
+        let arr2 = arr[i].split("=");
+        if (arr2[0] == name) {
+          return arr2[1];
+        }
+      }
+      return "";
+    }
+
+    console.log("XSRF-TOKEN: ", getCookie("XSRF-TOKEN"));
   </script>
 </body>
 

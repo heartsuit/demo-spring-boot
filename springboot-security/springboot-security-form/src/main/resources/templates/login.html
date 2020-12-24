@@ -5,8 +5,8 @@
     <title>Login</title>
 </head>
 <body>
-<form action="login" method="post">
-    <span>用户名</span><input type="text" name="username" /> <br>
+<form action="formLogin" method="post">
+    <span>用户名</span><input type="text" name="name" /> <br>
     <span>密码</span><input type="password" name="password" /> <br>
     <span>csrf token</span><input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <br>
     

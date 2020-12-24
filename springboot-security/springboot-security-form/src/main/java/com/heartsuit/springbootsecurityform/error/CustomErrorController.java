@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.Map;
 
-@Controller
+// @Controller
 public class CustomErrorController implements ErrorController {
   private static final String ERROR_PATH = "/error";
   private ErrorAttributes errorAttributes;

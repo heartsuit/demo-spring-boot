@@ -2,6 +2,7 @@ package com.heartsuit.springbootsecurityform.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +17,12 @@ public class LoginController {
   @RequestMapping(value = "/greeting")
   public String loginSuccess() {
     return "index";
+  }
+
+  @PostMapping(value = "/ok")
+  @ResponseBody
+  public String ok() {
+    return "ok post";
   }
 
   @GetMapping(value = "/user/add")

@@ -45,7 +45,7 @@ public final class HttpSessionCsrfTokenRepository implements CsrfTokenRepository
 
     private String sessionAttributeName = DEFAULT_CSRF_TOKEN_ATTR_NAME;
     
-    .s..
+    ...
 }    
 ```
 
