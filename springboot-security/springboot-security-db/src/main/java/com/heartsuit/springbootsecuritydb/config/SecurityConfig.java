@@ -5,6 +5,7 @@ import java.util.List;
 import com.heartsuit.springbootsecuritydb.dto.PermissionDto;
 import com.heartsuit.springbootsecuritydb.handler.CustomAuthenctiationFailureHandler;
 import com.heartsuit.springbootsecuritydb.mapper.PermissionMapper;
+import com.heartsuit.springbootsecuritydb.security.CustomAuthenticationProvider;
 import com.heartsuit.springbootsecuritydb.security.CustomUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     PermissionMapper permissionMapper;
 
+    @Autowired
+    CustomAuthenticationProvider customAuthenticationProvider;
+
     // Method2:
     @Bean
     public PasswordEncoder passwordEncoder () {
@@ -45,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         auth.userDetailsService(customUserDetailsService);
+        auth.authenticationProvider(customAuthenticationProvider);
 	}
 
     @Override

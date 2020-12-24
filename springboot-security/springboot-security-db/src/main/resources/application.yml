@@ -1,11 +1,11 @@
 server:
-  port: 8080
-spring:
-  thymeleaf:
-    cache: false
-  datasource:
-    url: jdbc:mysql://localhost:3306/spring_security?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
+            port: 8080
+            spring:
+              thymeleaf:
+                cache: false
+              datasource:
+                url: jdbc:mysql://localhost:3306/spring_security?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+                username: root
+                password: root
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                type: com.alibaba.druid.pool.DruidDataSource
