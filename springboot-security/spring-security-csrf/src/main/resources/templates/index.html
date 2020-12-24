@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Fishing: <img src="http://hello:8080/security/user/add">
+
+<script language="JavaScript">
+    function click() {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://hello:8080/security/greeting", true);
+        xhr.onload = function (e) {
+            console.log("response: ", e.target);
+        }
+        xhr.onerror = function (e) {
+            console.log("error: ", e)
+        }
+        xhr.send(null);
+    }
+    click();
+</script>
+</body>
+</html>
