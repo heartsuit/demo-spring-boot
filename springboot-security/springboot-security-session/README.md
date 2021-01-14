@@ -20,7 +20,7 @@
 
 将所有的 `Session` 集中存储，可使用分布式缓存方案比如 `Redis` 来缓存 `Session` ，实现 `Session` 共享，查询效率高，同时可以横向扩展。
 
-> 显然，上述四种方案实际中应用更多的是最后一种：基于分布式缓存（eg: Memcached, Redis）的Session共享，我们就今天演示这种方案。
+> 显然，上述四种方案实际中应用更多的是最后一种：基于分布式缓存（eg: Memcached, Redis）的Session共享，我们今天就演示这种方案。
 
 新建一个 `SpringBoot` 项目，起名 `springboot-security-Session` ，核心依赖为 `Web` , `SpringSecurity` , `SpringSession` 及 `Redis` ：
 
@@ -45,12 +45,6 @@
         <artifactId>spring-session-data-redis</artifactId>
     </dependency>
 
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-devtools</artifactId>
-        <scope>runtime</scope>
-        <optional>true</optional>
-    </dependency>
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
@@ -154,7 +148,7 @@ public class SessionController {
 
 ### Source Code
 
-[Github：https://github.com/heartsuit/demo-spring-boot/tree/master/springboot-security/springboot-security-session](https://github.com/heartsuit/demo-spring-boot/tree/master/springboot-security/springboot-security-session)
+* [Github](https://github.com/heartsuit/demo-spring-boot/tree/master/springboot-security/springboot-security-session)
 
 ### Reference
 
