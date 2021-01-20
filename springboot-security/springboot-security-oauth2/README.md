@@ -10,7 +10,7 @@
 
 （1） 注册应用
 
-在Github注册一个应用，生成 `client-id` ， `client-secret` 。
+在Github[注册一个应用](https://github.com/settings/applications/new)，生成 `client-id` ， `client-secret` 。
 
 ![2021-01-20-GithubApp.png](https://github.com/heartsuit/heartsuit.github.io/raw/master/pictures/2021-01-20-GithubApp.png)
 
