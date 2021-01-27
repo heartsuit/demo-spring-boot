@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/auth/realms/heartsuit
+        registration:
+          keycloak:
+            client-id: springsecurity
+            client-secret: 6b532289-4c11-4e62-acc0-5c67e13e4736
+            clientName: Keycloak
+          scope:
+            - openid
+            - profile
+            - email
+server:
+  port: 8000
