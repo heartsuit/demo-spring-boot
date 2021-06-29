@@ -1,0 +1,6 @@
+heartsuit:
+  redisson:
+    host: 10.16.1.110
+    port: 6379
+    database: 15
+    timeout: 10
