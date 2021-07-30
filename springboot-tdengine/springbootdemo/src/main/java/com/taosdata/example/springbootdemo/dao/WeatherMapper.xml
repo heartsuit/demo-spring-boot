@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taosdata.example.springbootdemo.dao.WeatherMapper">
+
+    <resultMap id="BaseResultMap" type="com.taosdata.example.springbootdemo.domain.Weather">
+        <id column="ts" jdbcType="TIMESTAMP" property="ts"/>
+        <result column="temperature" jdbcType="FLOAT" property="temperature"/>
+        <result column="humidity" jdbcType="FLOAT" property="humidity"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ts, temperature, humidity, location, groupid
+    </sql>
+
+    <update id="dropDB">
+        drop database if exists demo
+    </update>
+
+    <update id="createDB">
+        create database if not exists demo
+    </update>
+
+    <update id="createSuperTable">
+        create table if not exists demo.weather(ts timestamp, temperature float, humidity float) tags(location nchar(64), groupId int)
+    </update>
+
+    <update id="createTable" parameterType="com.taosdata.example.springbootdemo.domain.Weather">
+        create table if not exists demo.t#{groupId} using demo.weather tags(#{location}, #{groupId})
+    </update>
+
+    <select id="select" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from demo.weather order by ts desc
+        <if test="limit != null">
+            limit #{limit,jdbcType=BIGINT}
+        </if>
+        <if test="offset != null">
+            offset #{offset,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.taosdata.example.springbootdemo.domain.Weather">
+        <!--insert into demo.t#{groupId} (ts, temperature, humidity) values (#{ts}, ${temperature}, ${humidity})-->
+        insert into demo.t#{groupId} (ts, temperature, humidity) values (now, ${temperature}, ${humidity})
+    </insert>
+
+        <insert id="insertBatch" parameterType="java.util.List">
+            insert into demo.t0 (ts, temperature, humidity) values
+            <foreach separator=" " collection="list" item="weather" index="index" >
+                <!-- 参考涛思数据官方文档：https://www.taosdata.com/cn/documentation/taos-sql#data-type
+                数字后面的时间单位可以是 u(微秒)、a(毫秒)、s(秒)、m(分)、h(小时)、d(天)、w(周)
+                在指定降频操作（down sampling）的时间窗口（interval）时，时间单位还可以使用 n(自然月) 和 y(自然年)。-->
+                (now + #{index}a, #{weather.temperature}, #{weather.humidity})
+            </foreach>
+        </insert>
+
+    <!--用这种写法，直接使用前端传过来的时间戳，报错：uncategorized SQLException; SQL state []; error code [534]; TDengine ERROR (216): Syntax error in SQL; -->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into demo.t0 (ts, temperature, humidity) values
+        <foreach separator=" " collection="list" item="weather" index="index">
+            (#{weather.ts}, #{weather.temperature}, #{weather.humidity})
+        </foreach>
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into
+        <foreach separator=" " collection="list" item="weather" index="index">
+            demo.t0 values
+            (#{weather.ts}, #{weather.temperature}, #{weather.humidity})
+        </foreach>
+    </insert>
+
+    <select id="getSubTables" resultType="String">
+        select tbname from demo.weather
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from demo.weather
+    </select>
+
+    <resultMap id="avgResultSet" type="com.taosdata.example.springbootdemo.domain.Weather">
+        <id column="ts" jdbcType="TIMESTAMP" property="ts"/>
+        <result column="avg(temperature)" jdbcType="FLOAT" property="temperature"/>
+        <result column="avg(humidity)" jdbcType="FLOAT" property="humidity"/>
+    </resultMap>
+
+    <select id="avg" resultMap="avgResultSet">
+        select avg(temperature), avg(humidity)from demo.weather interval(1m)
+    </select>
+
+</mapper>
