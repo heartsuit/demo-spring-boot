@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `demo_employee` (
   `name` varchar(255) DEFAULT NULL COMMENT '姓名',
   `age` int(11) NOT NULL DEFAULT '0' COMMENT '年龄',
   `phone` varchar(15) DEFAULT NULL COMMENT '手机号码',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `username` (`name`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1240569421151879170 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='测试MyBatisPlus';

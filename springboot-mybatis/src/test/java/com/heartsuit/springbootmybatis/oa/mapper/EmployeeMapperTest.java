@@ -32,4 +32,27 @@ class EmployeeMapperTest {
         log.info("Employee: {}", e);
         assertNotNull(e);
     }
+
+    @Test
+    void save() {
+        Employee employee = new Employee();
+        employee.setName("阿拉斯加");
+        employee.setAge(12);
+        employee.setPhone("12345678901");
+        employeeMapper.save(employee);
+    }
+
+    @Test
+    void update() {
+        Employee employee = employeeMapper.findById(1240569421151879172L);
+        employee.setAge(34);
+        int updated = employeeMapper.update(employee);
+        assertTrue(updated > 0);
+    }
+
+    @Test
+    void delete() {
+        int deleted = employeeMapper.deleteById(1240569421151879170L);
+        assertTrue(deleted > 0);
+    }
 }

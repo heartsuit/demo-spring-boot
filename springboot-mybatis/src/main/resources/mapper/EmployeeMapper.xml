@@ -14,7 +14,20 @@
     <select id="findAll" resultType="com.heartsuit.springbootmybatis.oa.entity.Employee">
         select * from demo_employee
     </select>
+
     <select id="findById" resultType="com.heartsuit.springbootmybatis.oa.entity.Employee">
         select * from demo_employee where id = #{id}
     </select>
+
+    <insert id="save" parameterType="com.heartsuit.springbootmybatis.oa.entity.Employee">
+        insert into demo_employee(name, age, phone) values(#{name}, #{age}, #{phone})
+    </insert>
+
+    <insert id="update" parameterType="com.heartsuit.springbootmybatis.oa.entity.Employee">
+        update demo_employee set name=#{name}, age=#{age}, phone=#{phone} where id=#{id}
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        delete from demo_employee where id=#{id}
+    </delete>
 </mapper>
