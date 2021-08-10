@@ -6,7 +6,7 @@ import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.heartsuit.springbootmybatis.oa.entity.Employee;
 import com.heartsuit.springbootmybatis.oa.service.EmployeeService;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,8 +37,8 @@ public class EmployeeController {
      * @param response
      * @throws IOException
      */
-    @PostMapping("export-xls")
-    public void exportExcel(HttpServletResponse response) throws IOException {
+    @GetMapping("export-xls")
+    public void exportExcel(HttpServletResponse response) throws IOException, ClassNotFoundException {
         ExcelWriter writer = ExcelUtil.getWriter();
         List<Employee> employees = employeeService.findAll();
 
@@ -53,7 +53,8 @@ public class EmployeeController {
         }).collect(Collectors.toList());
 
         // Title
-        writer.merge(rows.size() - 1, "员工信息");
+        int columns = Class.forName("com.heartsuit.springbootmybatis.oa.entity.Employee").getDeclaredFields().length;
+        writer.merge(columns - 1, "员工信息");
 
         // Header
         writer.addHeaderAlias("id", "ID");

@@ -19,5 +19,13 @@
 ```
 1. 测试接口：全量导出
 
-POST http://localhost:8000/employee/export-xls
+GET http://localhost:8000/employee/export-xls
 
+Note: GET方式，方便测试，实际建议POST。
+
+2. 测试1万条数据导出效率
+
+- 批量向数据表插入数万条数据，再次测试导出效率；
+- 其实，导出时间取决于查效率以及查出的总数据量（涉及写入Excel以及Excel传输两部分时间）；
+
+从数万条记录中导出1万条数据，秒级。
