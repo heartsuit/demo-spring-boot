@@ -18,4 +18,5 @@ public interface EmployeeMapper {
     void save(Employee employee);
     int update(Employee employee);
     int deleteById(long id);
+    List<Employee> findByPage();
 }

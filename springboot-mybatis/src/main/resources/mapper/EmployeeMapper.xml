@@ -11,6 +11,10 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
+    <sql id="BaseColumnList">
+        id, name, age, phone, create_time
+    </sql>
+
     <select id="findAll" resultType="com.heartsuit.springbootmybatis.oa.entity.Employee">
         select * from demo_employee
     </select>
@@ -30,4 +34,11 @@
     <delete id="deleteById" parameterType="long">
         delete from demo_employee where id=#{id}
     </delete>
+
+    <select id="findByPage" resultType="com.heartsuit.springbootmybatis.oa.entity.Employee">
+        select
+        <include refid="BaseColumnList"/>
+        from demo_employee
+    </select>
+
 </mapper>

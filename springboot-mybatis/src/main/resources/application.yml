@@ -22,3 +22,9 @@ mybatis:
 
 server:
   port: 8000
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

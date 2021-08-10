@@ -5,10 +5,9 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.heartsuit.springbootmybatis.oa.entity.Employee;
+import com.heartsuit.springbootmybatis.oa.page.PageRequest;
 import com.heartsuit.springbootmybatis.oa.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -78,5 +77,10 @@ public class EmployeeController {
         writer.flush(out, true);
         writer.close();
         IoUtil.close(out);
+    }
+
+    @PostMapping("/findByPage")
+    public Object findPage(@RequestBody PageRequest pageRequest) {
+        return employeeService.findByPage(pageRequest);
     }
 }
