@@ -113,3 +113,41 @@ Closing non transactional SqlSession [org.apache.ibatis.session.defaults.Default
     ]
 }
 ```
+
+## 使用Hutool中的雪花算法生成ID
+
+1. 配置文件
+
+```yaml
+application:
+  datacenterId: 5
+  workerId: 3
+```
+
+2. 配置类
+
+```java
+@Configuration
+public class SnowflakeConfig {
+    @Value("${application.datacenterId}")
+    private Long datacenterId;
+
+    @Value("${application.workerId}")
+    private Long workerId;
+
+    @Bean
+    public Snowflake snowflake() {
+        return new Snowflake(workerId, datacenterId);
+    }
+}
+```
+
+3.使用雪花算法ID
+
+```java
+@Test
+void snowflake() {
+    long id = snowflake.nextId();
+    log.info("New id: {}", id);
+}
+```

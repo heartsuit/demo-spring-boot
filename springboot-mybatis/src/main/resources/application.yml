@@ -28,3 +28,7 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+application:
+  datacenterId: 5
+  workerId: 3
