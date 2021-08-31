@@ -1,0 +1,8 @@
+server:
+  port: 8002
+
+spring:
+  security:
+    user:
+      name: admin
+      password: admin123
