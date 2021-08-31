@@ -60,3 +60,28 @@ public class HelloController {
 Note：
 - Swagger2.x的访问地址：http://localhost:8080/swagger-ui.html
 - Swagger3.0的访问地址：http://localhost:8080/swagger-ui/index.html
+
+5. 控制生成文档的开关
+
+实际中我们的接口文档只会在开发环境下使用，所以一般我们会在生产环境下关闭文档。
+
+- application.yml
+```yaml
+spring:
+  profiles:
+    active: dev
+```
+
+- application-dev.yml
+```yaml
+springfox:
+  documentation:
+    enabled: true
+```
+
+- application-prod.yml
+```yaml
+springfox:
+  documentation:
+    enabled: false
+```
