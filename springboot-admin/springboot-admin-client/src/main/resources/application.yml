@@ -1,0 +1,50 @@
+server:
+  port: 7000
+
+#spring:
+#  security:
+#    user:
+#      name: admin
+#      password: admin123
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://localhost:3306/reading_notes?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: root
+
+  boot:
+    admin:
+      client:
+        instance:
+          name: Books
+          service-url: http://localhost:7000
+        url: http://localhost:8002
+        username: admin
+        password: admin123
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  typeAliasesPackage: com.heartsuit.*.entity
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env,beans
+
+logging:
+  pattern:
+    file: '%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx'
+  file:
+    name: books.log
+    path: D:\Java\IdeaProjects\demo-springboot\springboot-admin\springboot-admin-client
+  level:
+    com.heartsuit.client.*: INFO
+    com.baomidou.mybatisplus: DEBUG
+    com.heartsuit.client.mapper: DEBUG
