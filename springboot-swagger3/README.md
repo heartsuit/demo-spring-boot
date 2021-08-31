@@ -57,6 +57,8 @@ public class HelloController {
 
 4. 启动服务，浏览器访问
 
+没错，再没其他额外的注解了，直接启动服务，然后在浏览器访问即可。
+
 Note：
 - Swagger2.x的访问地址：http://localhost:8080/swagger-ui.html
 - Swagger3.0的访问地址：http://localhost:8080/swagger-ui/index.html
@@ -84,4 +86,31 @@ springfox:
 springfox:
   documentation:
     enabled: false
+```
+
+## 遇到的问题
+
+1. Unable to infer base url. This is common when using dynamic servlet registration or when the API is behind an API Gateway. The base url is the root of where all the swagger resources are served. For e.g. if the api is available at http://example.org/api/v2/api-docs then the base url is http://example.org/api/. Please enter the location manually: 
+ 
+原因是我们使用`RestControllerAdvice`统一处理接口响应，导致给Swagger的返回值也包装了一层，最终在浏览器无法解析、渲染页面。
+
+将`@RestControllerAdvice`改为：`@RestControllerAdvice(basePackages = "com.heartsuit.*.controller")`
+
+即限制`RestControllerAdvice`的拦截范围，仅处理指定包下的接口响应。
+
+2. 如果项目使用了`SpringSecurity`进行认证授权，则还需要对Swagger的资源进行放行。
+
+```java
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                "/error",
+                "/static/**",
+                "/swagger-ui/**",
+                "/v3/api-docs/**",
+                "/swagger-resources/**",
+                "/webjars/**",
+                "/favicon.ico"
+        );
+    }
 ```
