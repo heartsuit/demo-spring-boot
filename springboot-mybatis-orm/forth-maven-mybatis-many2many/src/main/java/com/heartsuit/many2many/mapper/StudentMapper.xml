@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heartsuit.many2many.mapper.StudentMapper">
+    <!-- 查询所有学生及他们的选择课程的信息 -->
+    <select id="selectStudentCourse" resultMap="studentCourseMap">
+        select
+        s.*,c.* from
+        tb_student s,tb_course c,tb_select_course sc
+        where s.s_id=sc.sc_s_id
+        and c.c_id=sc.sc_c_id
+    </select>
+
+    <!-- 根据学生 id 和课程 id 删除该学生该门课的选课情况 -->
+    <delete id="deleteStudentCourseById" parameterType="StudentCourseLink">
+        delete from tb_select_course where sc_s_id=#{student.id} and sc_c_id=#{course.id}
+    </delete>
+
+    <!-- resultMap: 映射实体类和字段之间的一一对应的关系 -->
+    <resultMap id="studentCourseMap" type="Student">
+        <id property="id" column="s_id" />
+        <result property="name" column="s_name" />
+        <result property="sex" column="s_sex" />
+        <result property="age" column="s_age" />
+        <!-- 多对多关联映射：collection -->
+        <collection property="courses" ofType="Course">
+            <id property="id" column="c_id" />
+            <result property="name" column="c_name" />
+            <result property="credit" column="c_credit" />
+        </collection>
+    </resultMap>
+</mapper>
