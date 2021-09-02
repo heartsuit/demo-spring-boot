@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heartsuit.mybatis.mapper.EmployeeMapper">
+    <!-- 自定义返回结果集 -->
+    <resultMap id="employeeMap" type="Employee">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="phone" property="phone"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 定义 SQL 语句，其中 id 需要和接口中的方法名一致 -->
+    <!-- useGeneratedKeys：实现自动生成主键 -->
+    <!-- keyProperty： 唯一标记一个属性 -->
+    <!-- parameterType 指明查询时使用的参数类型，resultType 指明查询返回的结果集类型 -->
+    <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
+        insert into employee (name, age, phone) values
+        (#{name}, #{age}, #{phone})
+    </insert>
+
+    <update id="updateEmployee" parameterType="Employee">
+        update employee set
+        age=#{age} where
+        id=#{id}
+    </update>
+
+    <delete id="deleteEmployee" parameterType="long">
+        delete from employee where
+        id=#{id}
+    </delete>
+
+    <!-- 如未为 Java Bean 起类别名，resultType="com.heartsuit.mybatis.model.Employee" -->
+
+    <!-- 使用 resultType 时，一定要保证，你属性名与字段名相同；如果不相同，就使用 resultMap -->
+    <select id="selectEmployeeById" parameterType="long" resultType="Employee">
+        select * from employee where id=#{id}
+    </select>
+
+    <select id="selectAllEmployee" resultMap="employeeMap">
+        select * from employee
+    </select>
+
+</mapper>
