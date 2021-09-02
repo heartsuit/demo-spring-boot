@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heartsuit.one2many.mapper.ClassesMapper">
+
+    <select id="selectClassAndStudentsById" parameterType="int" resultMap="classmap">
+         select c.c_id,c.c_name,s.s_id,s.s_name,s.s_sex,s.s_age from tb_class c left outer join tb_student s on c.c_id = s.s_c_id where c.c_id=#{id}
+    </select>
+
+    <!-- resultMap: 映射实体类和字段之间的一一对应的关系 -->
+    <resultMap id="classmap" type="Classes">
+        <id property="id" column="c_id" />
+        <result property="name" column="c_name" />
+        <!-- 一对多关联映射：collection -->
+        <collection property="students" ofType="Student">
+            <id property="id" column="s_id" />
+            <result property="name" column="s_name" />
+            <result property="sex" column="s_sex" />
+            <result property="age" column="s_age" />
+        </collection>
+    </resultMap>
+</mapper>
