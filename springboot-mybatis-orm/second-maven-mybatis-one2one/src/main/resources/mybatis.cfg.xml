@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--下划线转驼峰，否则create_time映射到对象后为null-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- 为 JavaBean 起类别名 -->
+    <typeAliases>
+        <!-- 指定一个包名起别名，将包内的 Java 类的类名作为类的类别名 -->
+        <package name="com.heartsuit.one2one.model"/>
+    </typeAliases>
+
+    <!-- 配置 mybatis 运行环境 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- type="JDBC" 代表直接使用 JDBC 的提交和回滚设置 -->
+            <transactionManager type="JDBC"/>
+
+            <!-- POOLED 表示支持 JDBC 数据源连接池 -->
+            <!-- 数据库连接池，由 Mybatis 管理，数据库名是 mybatis，MySQL 用户名 root，密码为 root -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/4test?serverTimezone=Asia/Shanghai"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!-- 通过 mapper 接口包加载整个包的映射文件 -->
+        <package name="com.heartsuit.one2one.mapper"/>
+    </mappers>
+</configuration>

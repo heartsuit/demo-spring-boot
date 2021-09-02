@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heartsuit.one2one.mapper.ClassesMapper">
+
+    <select id="selectClassById" parameterType="int" resultMap="classmap">
+        select * from tb_class c, tb_head_teacher t  where c.c_ht_id = t.ht_id and c.c_id=#{id}
+    </select>
+
+    <!-- resultMap: 映射实体类和字段之间的一一对应的关系 -->
+    <resultMap id="classmap" type="Classes">
+        <id property="id" column="c_id" />
+        <result property="name" column="c_name" />
+        <!-- 一对一关联映射：association -->
+        <association property="teacher" javaType="HeadTeacher">
+            <id property="id" column="ht_id" />
+            <result property="name" column="ht_name" />
+            <result property="age" column="ht_age" />
+        </association>
+    </resultMap>
+</mapper>
