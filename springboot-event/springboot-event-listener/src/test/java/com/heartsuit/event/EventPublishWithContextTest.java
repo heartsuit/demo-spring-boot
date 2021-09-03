@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
-public class EventTest implements ApplicationContextAware {
+public class EventPublishWithContextTest implements ApplicationContextAware {
     private ApplicationContext context = null;
 
     @Override

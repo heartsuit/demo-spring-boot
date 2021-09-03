@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class MyListener {
+public class MyListenerWithAnnotation {
     @EventListener
     public void handleEvent(MyEvent event) {
-        log.info("Message received: {}", event.getMsg());
+        log.info("MyListenerWithAnnotation, Message received: {}", event.getMsg());
     }
 }
