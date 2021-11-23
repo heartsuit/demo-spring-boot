@@ -1,0 +1,8 @@
+minio:
+  endpoint: http://hadoop1:9000
+  accessKey: AKIAIOSFODNN7EXAMPLE
+  secretKey: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+  bucketName: heartsuit
+
+server:
+  port: 8090
