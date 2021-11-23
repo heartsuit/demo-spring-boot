@@ -11,6 +11,27 @@
 
 以RESTful API对外提供文件上传、下载、删除操作接口；
 
+使用PostMan测试文件上传、下载、删除接口：头信息：Content-Type:multipart/form-data
+
+```bash
+# 上传
+curl --location --request POST 'localhost:8090/minio/uploadFile' \
+--header 'Content-Type: multipart/form-data' \
+--form 'file=@"/C:/Users/nxq01/Downloads/springboot-minio-master.zip"'
+
+# 下载
+curl --location --request POST 'localhost:8090/minio/downloadFile' \
+--form 'bucketName="heartsuit"' \
+--form 'originalName="springboot-minio-master.zip"' \
+--form 'filePath="2021-11-23/92cf3f69-501b-41de-83ae-f67e5a57f35f.zip"'
+
+# 删除
+curl --location --request POST 'localhost:8090/minio/deleteFile' \
+--header 'Content-Type: multipart/form-data' \
+--form 'bucketName="heartsuit"' \
+--form 'filePath="2021-11-23/92cf3f69-501b-41de-83ae-f67e5a57f35f.zip"'
+```
+
 ## MinIO在Docker下单实例运行
 
 ```
