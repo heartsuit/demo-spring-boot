@@ -1,7 +1,7 @@
 server:
   port: 8080
 
-# springÅäÖÃ
+# springé…ç½®
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -9,12 +9,18 @@ spring:
     username: root
     password: root
 
-# mybatisplusÅäÖÃ
+# mybatisplusé…ç½®
 mybatis-plus:
-  # ËÑË÷Ö¸¶¨°ü±ğÃû
+  # æœç´¢æŒ‡å®šåŒ…åˆ«å
   typeAliasesPackage: com.heartsuit.domain
-  # ÅäÖÃmapperµÄÉ¨Ãè£¬ÕÒµ½ËùÓĞµÄmapper.xmlÓ³ÉäÎÄ¼ş
+  # é…ç½®mapperçš„æ‰«æï¼Œæ‰¾åˆ°æ‰€æœ‰çš„mapper.xmlæ˜ å°„æ–‡ä»¶
   mapper-locations: classpath:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+pdf:
+  watermark:
+    text:
+      enabled: true
+      content: 'Heartsuitæ–‡å­—æ°´å°666'

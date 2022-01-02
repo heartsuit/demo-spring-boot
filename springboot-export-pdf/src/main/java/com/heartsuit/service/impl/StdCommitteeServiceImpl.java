@@ -2,6 +2,7 @@ package com.heartsuit.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.heartsuit.config.PdfConfigProperties;
 import com.heartsuit.domain.StdCommittee;
 import com.heartsuit.domain.StdCommitteeBranch;
 import com.heartsuit.domain.StdCommitteeSecretariat;
@@ -13,6 +14,7 @@ import com.heartsuit.service.IStdCommitteeSecretariatStaffService;
 import com.heartsuit.service.IStdCommitteeService;
 import com.heartsuit.utils.PDFConstant;
 import com.heartsuit.utils.PdfUtil;
+import com.heartsuit.utils.TextWaterMark;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -41,6 +43,9 @@ public class StdCommitteeServiceImpl extends ServiceImpl<StdCommitteeMapper, Std
     private IStdCommitteeSecretariatStaffService stdCommitteeSecretariatStaffService;
 
     @Autowired
+    private PdfConfigProperties pdfConfigProperties;
+
+    @Autowired
     private IStdCommitteeBranchService stdCommitteeBranchService;
 
     private void buildCommittee(StdCommittee stdCommittee) {
@@ -65,8 +70,15 @@ public class StdCommitteeServiceImpl extends ServiceImpl<StdCommitteeMapper, Std
         buildCommittee(stdCommittee);
         Document document = new Document();
         try {
-            PdfWriter.getInstance(document, outputStream);
+            PdfWriter instance = PdfWriter.getInstance(document, outputStream);
             document.open();
+
+            // 添加文字水印
+            document.newPage();
+
+            if (pdfConfigProperties.getText().getEnabled()) {
+                instance.setPageEvent(new TextWaterMark(pdfConfigProperties.getText().getContent()));
+            }
 
             // 解决中文不显示问题
             BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
