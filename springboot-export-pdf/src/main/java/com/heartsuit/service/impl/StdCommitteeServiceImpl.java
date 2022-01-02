@@ -12,6 +12,7 @@ import com.heartsuit.service.IStdCommitteeBranchService;
 import com.heartsuit.service.IStdCommitteeSecretariatService;
 import com.heartsuit.service.IStdCommitteeSecretariatStaffService;
 import com.heartsuit.service.IStdCommitteeService;
+import com.heartsuit.utils.ImageWaterMark;
 import com.heartsuit.utils.PDFConstant;
 import com.heartsuit.utils.PdfUtil;
 import com.heartsuit.utils.TextWaterMark;
@@ -21,6 +22,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -78,6 +81,12 @@ public class StdCommitteeServiceImpl extends ServiceImpl<StdCommitteeMapper, Std
 
             if (pdfConfigProperties.getText().getEnabled()) {
                 instance.setPageEvent(new TextWaterMark(pdfConfigProperties.getText().getContent()));
+            }
+
+            // 添加图片水印
+            if (pdfConfigProperties.getImage().getEnabled()) {
+                Resource resource = new ClassPathResource(pdfConfigProperties.getImage().getFile());
+                instance.setPageEvent(new ImageWaterMark(resource.getURL().getPath()));
             }
 
             // 解决中文不显示问题

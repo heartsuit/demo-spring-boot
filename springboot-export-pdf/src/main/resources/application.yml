@@ -22,5 +22,8 @@ mybatis-plus:
 pdf:
   watermark:
     text:
-      enabled: true
+      enabled: false
       content: 'Heartsuit文字水印666'
+    image:
+      enabled: true
+      file: 'avatar.jpg'

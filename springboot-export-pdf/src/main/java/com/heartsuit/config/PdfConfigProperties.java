@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class PdfConfigProperties
 {
     private TextProperties text = new TextProperties();
+    private ImageProperties image = new ImageProperties();
 
     @Data
     public static class TextProperties{
@@ -21,4 +22,9 @@ public class PdfConfigProperties
         private String content;
     }
 
+    @Data
+    public static class ImageProperties{
+        private Boolean enabled;
+        private String file;
+    }
 }
