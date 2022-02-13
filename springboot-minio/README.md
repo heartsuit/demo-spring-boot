@@ -49,7 +49,7 @@ docker run -p 9000:9000 \
 
 - 配置
 
-通告docker-compose在一台主机上，运行四个MinIOn实例，并由Nginx进行反向代理，负载均衡对外统一提供服务
+通过docker-compose在一台主机上，运行四个MinIO实例，并由Nginx进行反向代理，负载均衡对外统一提供服务
 
 涉及的两个配置：docker-compose.yaml，nginx.conf。
 
@@ -241,7 +241,7 @@ http {
   
 > For example, an 16-server distributed setup with 200 disks per node would continue serving files, up to 4 servers can be offline in default configuration i.e around 800 disks down MinIO would continue to read and write objects.
 ```
-MinIO官方建议起码要搭建一个四快盘的集群，具体配置几台机器看自己需求确定，比如：
+MinIO官方建议起码要搭建一个四块盘的集群，具体配置几台机器看自己需求确定，比如：
 一台机器四块硬盘
 二台机器两块硬盘
 四台机器一块硬盘
