@@ -32,11 +32,20 @@ public class LoginController {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
+    /**
+     * 测试匿名访问时403
+     * @return
+     */
     @GetMapping("/hi")
     public String hi() {
         return "Hi~";
     }
 
+    /**
+     * 测试SM2公钥加密与私钥解密
+     * @param formUser
+     * @return
+     */
     @PostMapping("/sm2")
     public String sm2(@RequestBody FormUser formUser) {
         String publicKey = "MFkwEwYHKoZIzj0CAQYIKoEcz1UBgi0DQgAEq69oLar0vruQNWO8sA4fui58WM7p\n" +
@@ -52,6 +61,12 @@ public class LoginController {
         return decryptedString;
     }
 
+    /**
+     * 认证接口，其中使用SM2国密算法进行私钥解密
+     * @param formUser 加密后的用户信息
+     * @param request
+     * @return 认证后的用户
+     */
     @PostMapping("/login")
     public String login(@RequestBody FormUser formUser, HttpServletRequest request) {
         log.info("formUser encrypted: {}", formUser);
