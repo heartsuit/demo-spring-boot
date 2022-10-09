@@ -1,0 +1,9 @@
+server:
+  port: 8000
+
+# 密码加密传输，前端公钥加密，后端私钥解密
+sm2:
+  private_key: |
+    MIGHAgEAMBMGByqGSM49AgEGCCqBHM9VAYItBG0wawIBAQQgHXugwQeFgF6ELKVH
+    l28evMOM/Cc2H/EGwv0wcIVYkUShRANCAASrr2gtqvS+u5A1Y7ywDh+6LnxYzum9
+    sypgJ1bj0S+LyxQJCqg1jE7i/i4LADFJLvO1HY1LQW+6cIM2rLWXzQQG
