@@ -71,8 +71,6 @@ l28evMOM/Cc2H/EGwv0wcIVYkUShRANCAASrr2gtqvS+u5A1Y7ywDh+6LnxYzum9
 sypgJ1bj0S+LyxQJCqg1jE7i/i4LADFJLvO1HY1LQW+6cIM2rLWXzQQG
 ```
 
-![2022-10-07-Kubernetes.jpg](https://github.com/heartsuit/heartsuit.github.io/raw/master/pictures/2022-10-07-Kubernetes.jpg)
-
 ## SpringBoot后端服务如何集成SM2？
 
 ### 添加依赖
