@@ -230,7 +230,7 @@ npm install sm-crypto
 
 Note：前端库 `sm-crypto` 对公钥的格式要求为**04开头的16进制公钥**，不可以使用 `OpenSSL` 直接生成的带换行的公钥形式。
 
-```
+```html
 <template>
   <div>
     <span>用户名</span><input type="text" v-model="user.username" />
@@ -389,6 +389,8 @@ sm2:
 ### java.security.spec. InvalidKeySpecException: encoded key spec not recognised
 
 升级版本 `1.53` ——> `1.68` 。
+
+![2022-10-15-AliCloud.jpg](https://github.com/heartsuit/heartsuit.github.io/raw/master/pictures/2022-10-15-AliCloud.jpg)
 
 ```xml
 		<dependency>
