@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driver-class-name: com.taosdata.jdbc.TSDBDriver
+    url: jdbc:TAOS://td0:6030/iot?charset=UTF-8&locale=en_US.UTF-8&timezone=UTC-8
+    username: root
+    password: taosdata
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 5
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+logging:
+  level:
+    com:
+      taosdata:
+        example:
+          mybatisplusdemo:
+            mapper: debug
+td:
+  consumer:
+    bootstrap-servers: td0:6030
+    msg-with-table-name: true
+    enable-auto-commit: true
+    group-id: demo
+    value-deserializer: com.taosdata.example.mybatisplusdemo.deserializer.PowerDeserializer

@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "td.consumer.bootstrap-servers",
+      "type": "java.lang.String",
+      "description": "Description for td.consumer.bootstrap-servers."
+  }
+] }
