@@ -127,6 +127,24 @@ public class OpcUaClientService {
     }
 
     /**
+     * 读取指定节点的值的重载方法
+     * @param client
+     * @param nodeId
+     * @throws Exception
+     */
+    public void readNodeValue(OpcUaClient client, NodeId nodeId) throws Exception {
+        //读取节点数据
+        DataValue value = client.readValue(0.0, TimestampsToReturn.Neither, nodeId).get();
+
+        // 状态
+        System.out.println("Status: " + value.getStatusCode());
+
+        //标识符
+        String id = String.valueOf(nodeId.getIdentifier());
+        System.out.println(id + ": " + value.getValue().getValue());
+    }
+
+    /**
      * 写入节点数据
      *
      * @param client
@@ -163,6 +181,41 @@ public class OpcUaClientService {
                 .thenAccept(t -> {
                     //节点
                     NodeId nodeId = new NodeId(namespaceIndex, identifier);
+                    ReadValueId readValueId = new ReadValueId(nodeId, AttributeId.Value.uid(), null, null);
+                    //创建监控的参数
+                    MonitoringParameters parameters = new MonitoringParameters(UInteger.valueOf(atomic.getAndIncrement()), 1000.0, null, UInteger.valueOf(10), true);
+                    //创建监控项请求
+                    //该请求最后用于创建订阅。
+                    MonitoredItemCreateRequest request = new MonitoredItemCreateRequest(readValueId, MonitoringMode.Reporting, parameters);
+                    List<MonitoredItemCreateRequest> requests = new ArrayList<>();
+                    requests.add(request);
+                    //创建监控项，并且注册变量值改变时候的回调函数。
+                    t.createMonitoredItems(
+                            TimestampsToReturn.Both,
+                            requests,
+                            (item, id) -> item.setValueConsumer((it, val) -> {
+                                System.out.println("nodeid :" + it.getReadValueId().getNodeId());
+                                System.out.println("value :" + val.getValue().getValue());
+                            })
+                    );
+                }).get();
+
+        //持续订阅
+        Thread.sleep(Long.MAX_VALUE);
+    }
+
+    /**
+     * 订阅单个节点的重载方法
+     * @param client
+     * @param nodeId
+     * @throws Exception
+     */
+    public void subscribe(OpcUaClient client, NodeId nodeId) throws Exception {
+        //创建发布间隔1000ms的订阅对象
+        client
+                .getSubscriptionManager()
+                .createSubscription(1000.0)
+                .thenAccept(t -> {
                     ReadValueId readValueId = new ReadValueId(nodeId, AttributeId.Value.uid(), null, null);
                     //创建监控的参数
                     MonitoringParameters parameters = new MonitoringParameters(UInteger.valueOf(atomic.getAndIncrement()), 1000.0, null, UInteger.valueOf(10), true);
