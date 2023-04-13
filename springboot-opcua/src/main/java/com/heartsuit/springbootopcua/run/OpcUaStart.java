@@ -17,30 +17,30 @@ public class OpcUaStart {
         OpcUaClientService opcUaClientService = new OpcUaClientService();
 
         // 与OPC UA服务端建立连接，并返回客户端实例
-        OpcUaClient client = opcUaClientService.connectOpcUaServer("127.0.0.1", "49320", "");
+        OpcUaClient client = opcUaClientService.connectOpcUaServer("milo.digitalpetri.com", "62541", "/milo");
 
         // 遍历所有节点
-        opcUaClientService.listNode(client, null);
+//        opcUaClientService.listNode(client, null);
 
         // 读取指定节点的值
-//        opcUaClientService.readNodeValue(client, 2, "Demo.1500PLC.D1");
-//        opcUaClientService.readNodeValue(client, 2, "Demo.1500PLC.D2");
+        opcUaClientService.readNodeValue(client, 2, "Dynamic/RandomInt32");
+        opcUaClientService.readNodeValue(client, 2, "Dynamic/RandomInt64");
 
         // 向指定节点写入数据
-        opcUaClientService.writeNodeValue(client, 2, "Demo.1500PLC.D1", 6f);
+//        opcUaClientService.writeNodeValue(client, 2, "Demo.1500PLC.D1", 6f);
 
         // 订阅指定节点
-//        OpcUaClientUtil.subscribe(client, 2, "Demo.1500PLC.D1");
+//        opcUaClientService.subscribe(client, 2, "Dynamic/RandomDouble");
 
         // 批量订阅多个节点
         List<String> identifiers = new ArrayList<>();
-        identifiers.add("Demo.1500PLC.D1");
-        identifiers.add("Demo.1500PLC.D2");
+        identifiers.add("Dynamic/RandomDouble");
+        identifiers.add("Dynamic/RandomFloat");
 
         opcUaClientService.setBatchNamespaceIndex(2);
         opcUaClientService.setBatchIdentifiers(identifiers);
 
-//        OpcUaClientUtil.subscribeBatch(client);
+//        opcUaClientService.subscribeBatch(client);
         opcUaClientService.subscribeBatchWithReconnect(client);
     }
 }
